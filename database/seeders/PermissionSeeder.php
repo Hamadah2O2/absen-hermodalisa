@@ -21,7 +21,7 @@ class PermissionSeeder extends Seeder
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'dokter']);
-        Role::create(['name' => 'suster']);
+        Role::create(['name' => 'perawat']);
         Role::create(['name' => 'pasien']);
     }
 }
