@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,8 +32,11 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get("/sulog", function () {
-        echo "Wah anda sudah login dan terverifikasi";
+        $user = Auth::user();
+        echo "Wah anda sudah login dan terverifikasi, Halo " . $user->name;
     });
+    Route::get("/manage/dokter", [AdminController::class, 'manageUserDokter'])->name('user.dokter');
+    Route::get("/manage/pasien", [AdminController::class, 'manageUserPasien'])->name('user.pasien');
 });
 
 
