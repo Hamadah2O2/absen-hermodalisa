@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/absen', [AbsenController::class, 'index'])->name("absen");
+    Route::get('/absen/{id}', [AbsenController::class, 'update'])->name("absen.update");
 });
 
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
@@ -35,7 +39,14 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
         $user = Auth::user();
         echo "Wah anda sudah login dan terverifikasi, Halo " . $user->name;
     });
-    Route::get("/manage/dokter", [AdminController::class, 'manageUserDokter'])->name('user.dokter');
+
+    Route::get("/manage/dokter", [AdminController::class, 'indexDokter'])->name('user.dokter');
+    Route::get("/manage/dokter/create", [AdminController::class, 'createDokter'])->name('tambah.dokter');
+    Route::post("/manage/dokter", [AdminController::class, 'storeDokter']);
+    Route::get("/manage/dokter/{id}", [AdminController::class, 'editDokter'])->name('edit.dokter');
+    Route::put("/manage/dokter/{id}", [AdminController::class, 'updateDokter'])->name('update.dokter');
+    Route::delete("/manage/dokter/{id}", [AdminController::class, 'destroyDokter'])->name('destroy.dokter');
+
     Route::get("/manage/pasien", [AdminController::class, 'manageUserPasien'])->name('user.pasien');
 });
 

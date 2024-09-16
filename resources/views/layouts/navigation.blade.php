@@ -4,7 +4,7 @@
         <div class="tw-flex tw-justify-between tw-h-16">
             <div class="tw-flex">
                 <!-- Logo -->
-                <div class="shrink-0 tw-flex tw-items-center">
+                <div class="tw-shrink-0 tw-flex tw-items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="tw-block tw-h-9 tw-w-auto tw-fill-current tw-text-gray-800" />
                     </a>
@@ -21,6 +21,9 @@
                         </x-nav-link>
                         <x-nav-link :href="route('user.pasien')" :active="request()->routeIs('user.pasien')">
                             {{ __('Data Pasien') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('absen')" :active="request()->routeIs('absen')">
+                            {{ __('Absensi') }}
                         </x-nav-link>
                     @endrole
                 </div>
